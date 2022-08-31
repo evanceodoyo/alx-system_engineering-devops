@@ -11,4 +11,7 @@ Changes the working directory to user's home directory
 Display current directory contents in a long format
 
 # Task 4
-Display current directory contents, including hidden files(starting with .)
+Display current directory contents, including hidden files(starting with .i)
+
+# Task 5 
+Display current directory contents in long format, with user and group IDS displayed numerically, and hidden files. 
