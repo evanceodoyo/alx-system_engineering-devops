@@ -14,4 +14,7 @@ Display current directory contents in a long format
 Display current directory contents, including hidden files(starting with .i)
 
 # Task 5 
-Display current directory contents in long format, with user and group IDS displayed numerically, and hidden files. 
+Display current directory contents in long format, with user and group IDS displayed numerically, and hidden files.
+
+# Task 6
+Create a directory named my_first_directory in the /tmp/ directory 
