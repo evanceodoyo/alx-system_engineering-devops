@@ -48,3 +48,6 @@ Move all files beginning with an uppercase letter to the directory /tmp/u.
 
 # Task 16 
 Delete all files in the current working directory that end with the character
+
+# Task 17
+Create the directories welcome/, welcome/to/ and welcome/to/school in the current directory
