@@ -1,0 +1,2 @@
+#!/bin/activate
+tr -d 'c' | tr -d 'C'
