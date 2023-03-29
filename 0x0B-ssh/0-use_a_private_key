@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# A simple bash script to connect to a server.
+# private key ~/.ssh/school; user ubuntu; host IP 8.8.8.8
+
+ssh -i ~/.ssh/school ubuntu@8.8.8.8
