@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Configure your Nginx server to have a custom 404 page that contains a string
+
+REDIRECT_301="\\\tlocation /redirect_me {\n\t\t return 301 https://youtube.com;\n\t}\n" #variable for the config
+NOTFOUND_404="\\\terror_page 404 /404.html;\n\\tlocation = /404.html {\n\t\tinternal;\n\t}\n"
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+sudo sed -i "24i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+sudo sed -i "53i $REDIRECT_301" /etc/nginx/sites-enabled/default # add config at line 53
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo sed -i "57i $NOTFOUND_404" /etc/nginx/sites-enabled/default # add config at line 57
+
+if [ "$(pgrep -c nginx)" -le 0 ]; then
+	sudo service nginx start
+else
+	sudo service nginx restart
+fi
+
