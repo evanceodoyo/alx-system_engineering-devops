@@ -14,7 +14,7 @@ sudo add-apt-repository -y ppa:vbernat/haproxy-2.6
 sudo apt-get -y install haproxy=2.6.\*
 
 # Make sure HAproxy can be managed via an init script
-sudo sed -i "s/ENABLED=0/ENABLED=1/" /etc/default/haproxy
+# sudo sed -i "s/ENABLED=0/ENABLED=1/" /etc/default/haproxy
 
 # Backup original config file before attempt modifications
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
@@ -22,4 +22,6 @@ sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
 # Configure to include roundrobin and two servers
 sudo sed -i "\$a $CONFIG" /etc/haproxy/haproxy.cfg
 
+# Make sure HAproxy can be managed via an init script
+sudo systemctl enable haproxy.service
 sudo service haproxy restart
