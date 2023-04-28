@@ -10,7 +10,7 @@ import requests
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/users/"
     employees = requests.get(url).json()
-    
+
     emp_data = {}
     for emp in employees:
         emp_id = str(emp.get('id'))
@@ -25,4 +25,4 @@ if __name__ == "__main__":
             emp_data[emp_id].append(task_data)
 
     with open("todo_all_employees.json", "w") as f:
-         json.dump(emp_data, f)
+        json.dump(emp_data, f)
