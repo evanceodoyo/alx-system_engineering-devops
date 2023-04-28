@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """
-Script to export data in CSV format.
-Usage: ./1-export_to_CSV.py <employee_id>
+Script to export data in JSON format.
+Usage: ./2-export_to_JSON.py <employee_id>
 """
 
+import json
 import requests
 import sys
 
@@ -21,8 +22,11 @@ if __name__ == "__main__":
     emp_username = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                                 .format(emp_id)).json().get('username')
 
-    with open(emp_id + ".csv", "w") as f:
-        for t in response.json():
-            f.write('"{}","{}","{}","{}"'.format(
-                    emp_id, emp_username, t.get("completed"), t.get("title")))
-            f.write("\n")
+    tasks = []
+    for t in response.json():
+        tasks.append({"task": t.get('title'),
+                      "completed": t.get('completed'),
+                      "username": emp_username})
+
+    with open(emp_id + ".json", "w") as f:
+        json.dump({emp_id: tasks}, f)
