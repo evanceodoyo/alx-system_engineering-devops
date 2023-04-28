@@ -21,7 +21,7 @@ if __name__ == "__main__":
     emp_username = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                                 .format(emp_id)).json().get('username')
 
-    with open("USER_ID.csv", "w") as f:
+    with open(emp_id + ".csv", "w") as f:
         for t in response.json():
             f.write('"{}","{}","{}","{}"'.format(
                     emp_id, emp_username, t.get("completed"), t.get("title")))
