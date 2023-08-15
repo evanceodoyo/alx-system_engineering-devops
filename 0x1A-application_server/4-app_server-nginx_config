@@ -1,0 +1,29 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        add_header X-Served-By 65311-web-01;
+        server_name 127.0.0.1 100.25.203.236;
+
+        location /airbnb-onepage/ {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+        }
+
+	location /airbnb-dynamic/number_odd_or_even/ {
+		rewrite /airbnb-dynamic/(.*) $1 break;
+		include proxy_params;
+		proxy_pass http://127.0.0.1:5001/airbnb-dynamic/number_odd_or_even;
+	}
+
+	location /api/ {
+		include proxy_params;
+		proxy_pass http://127.0.0.1:5002/api/;
+	}
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+}
