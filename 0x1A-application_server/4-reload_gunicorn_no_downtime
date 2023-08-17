@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
 # Gracefully reloads Gunicorn.
 
-ps aux | pgrep gunicorn | xargs kill -HUP
+
+# Send HUP signal to Gunicorn master process to gracefully reload workers
+kill -HUP "$(pgrep gunicorn)"
+
+# Wait for a moment to allow workers to finish processing ongoing requests
+sleep 5
+
+# Check if the new workers are up and running
+new_workers=$(pgrep gunicorn)
+if [[ -z "$new_workers" ]]; then
+    echo "Failed to reload Gunicorn. New workers not started."
+    exit 1
+fi
+
+
