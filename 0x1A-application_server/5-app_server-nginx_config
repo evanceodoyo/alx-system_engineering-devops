@@ -22,7 +22,8 @@ server {
         }
 
         location / {
-                include proxy_params;
+                rewrite ^/$ /2-hbnb break;
+		include proxy_params;
                 proxy_pass http://127.0.0.1:5003/;
         }
 
